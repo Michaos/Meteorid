@@ -5,12 +5,16 @@ import java.sql.Timestamp;
 public class Day {
 	
 	private Timestamp timestamp;
-	private int name;
+	private String name;
+	private Integer tempDay;
 	private Integer tempMin;
 	private Integer tempMax;
+	private Integer tempMorning;
+	private Integer tempEvening;
+	private Integer tempNight;
 	private String icon;
 	
-	public Day(Timestamp timestamp, int name, Integer tempMin, Integer tempMax, String icon) {
+	public Day(Timestamp timestamp, String name, Integer tempMin, Integer tempMax, String icon) {
 		this.timestamp = timestamp;
 		this.name = name;
 		this.tempMin = tempMin;
@@ -26,11 +30,11 @@ public class Day {
 		this.timestamp = timestamp;
 	}
 
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
