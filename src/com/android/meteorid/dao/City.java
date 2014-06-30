@@ -2,17 +2,17 @@ package com.android.meteorid.dao;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 public class City {
 
 	private int id;
 	private String name;
-	private Integer temperature;
 	private ArrayList<Day> dayList;
 	
-	public City(int id, String name, Integer temperature, ArrayList<Day> dayList) {
-		this.id = id;
-		this.name = name;
-		this.temperature = temperature;
+	public City(JSONObject jsonObject, ArrayList<Day> dayList) {
+		this.id = jsonObject.optInt("id");
+		this.name = jsonObject.optString("name");
 		this.dayList = dayList;
 	}
 
@@ -30,14 +30,6 @@ public class City {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Integer getTemperature() {
-		return temperature;
-	}
-
-	public void setTemperature(Integer temperature) {
-		this.temperature = temperature;
 	}
 
 	public ArrayList<Day> getDayList() {
