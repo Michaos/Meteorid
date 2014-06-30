@@ -1,5 +1,7 @@
 package com.android.meteorid.manager;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,12 +11,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.android.meteorid.dao.City;
+import com.android.meteorid.dao.Day;
 import com.android.meteorid.utils.Utils;
 
 public class DataManager {
 
 	private static final String TAG = "DataManager";
-	// ici on gère tout le traitement de données ( Get jsons)
+	// ici on gÃ¨re tout le traitement de donnÃ©es ( Get jsons)
 
 	private static DataManager instance;
 	private static Context mContext;
@@ -44,24 +48,32 @@ public class DataManager {
 
 		@Override
 		protected Boolean doInBackground(Integer... params) {
-			String urlApi = FluxManager.URL_API.replace("__ID__", "2988507");
 			
-			JSONObject jsonFlux = ApiManager.callAPI(urlApi);
-			
-			// check if json no null
-			if(jsonFlux != null){
-				Log.v(TAG, "JSONLFUX : " + jsonFlux.toString());
-			} else {
-				Log.v(TAG, "Pas de JsonFlux");
-			}
-			
-			try {
-				JSONArray jsonArr = jsonFlux.getJSONArray("list");
-				Log.v(TAG, "jsonArray: " + jsonArr);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				Log.v(TAG, "JSONParse EXCEPTION: " + e.getMessage());
-				e.printStackTrace();
+			for (int i = 0; i < MappingManager.CITIES.length; i++) {
+				String urlApi = FluxManager.URL_API.replace("__ID__", MappingManager.CITIES[i]);
+				
+				JSONObject jsonFlux = ApiManager.callAPI(urlApi);
+				
+				// check if json no null
+				if(jsonFlux != null){
+					try {
+						
+						JSONArray jsonArray = jsonFlux.getJSONArray("list");
+						
+						ArrayList<Day> dayList = new ArrayList<Day>();
+						
+						for (int j = 0; j < jsonArray.length(); j++) {
+							dayList.add(new Day(jsonArray.getJSONObject(j)));
+						}
+						
+						JSONObject jsonObject = jsonFlux.getJSONObject("city");
+						City city = new City(jsonObject, dayList);
+						
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+					
+				}
 			}
 			
 			return false;
