@@ -45,9 +45,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
-		
-		  DataManager myData = DataManager.getInstance(this);
-		  myData.launchTask();
 	}
 
 
