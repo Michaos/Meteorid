@@ -1,5 +1,6 @@
 package com.android.meteorid.manager;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -7,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -20,8 +22,12 @@ public class DataManager {
 	private static final String TAG = "DataManager";
 	// ici on gÃ¨re tout le traitement de donnÃ©es ( Get jsons)
 
+	public static final String LOAD_BASIC_CITY_OK = "loadBasicCityOk";
+	
 	private static DataManager instance;
 	private static Context mContext;
+	
+	private ArrayList<City> basicCityList;
 
 	private DataManager() {
 	}
@@ -49,8 +55,12 @@ public class DataManager {
 		@Override
 		protected Boolean doInBackground(Integer... params) {
 			
+			basicCityList = new ArrayList<City>();
+			
 			for (int i = 0; i < MappingManager.CITIES.length; i++) {
 				String urlApi = FluxManager.URL_API.replace("__ID__", MappingManager.CITIES[i]);
+				
+				System.out.println(urlApi);
 				
 				JSONObject jsonFlux = ApiManager.callAPI(urlApi);
 				
@@ -67,7 +77,7 @@ public class DataManager {
 						}
 						
 						JSONObject jsonObject = jsonFlux.getJSONObject("city");
-						City city = new City(jsonObject, dayList);
+						basicCityList.add(new City(jsonObject, dayList));
 						
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -76,8 +86,20 @@ public class DataManager {
 				}
 			}
 			
-			return false;
+			return true;
 		}
-
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if(result){
+				System.out.println("OK !");
+				mContext.sendBroadcast(new Intent(LOAD_BASIC_CITY_OK));
+			}
+			super.onPostExecute(result);
+		}
+	}
+	
+	public ArrayList<City> getBasicCityList(){
+		return basicCityList;
 	}
 }
