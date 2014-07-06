@@ -21,13 +21,11 @@ public class CityFragment extends Fragment{
 	private static City myCity;
 	
 	public static CityFragment newInstance(City city) {
-		CityFragment fragment = new CityFragment();
-		myCity = city;
-		/*Bundle bundle = new Bundle();
-		bundle.putSerializable("nav", naav);
-		bundle.putSerializable("title", name);
-		fragment.setArguments(bundle);*/
-		return fragment;
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("city", city);
+		CityFragment frag = new CityFragment();
+		frag.setArguments(bundle);
+		return frag;
 	}
 	
 	@Override
@@ -37,6 +35,7 @@ public class CityFragment extends Fragment{
 	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
+		myCity = (City) getArguments().getSerializable("city");
 		System.out.println(myCity.getName());
 		((TextView) view.findViewById(R.id.city)).setText(myCity.getName());
 		//((TextView) view.findViewById(R.id.temp)).setText(myCity.getDayList().get(0).getTempDay());
