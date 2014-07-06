@@ -1,6 +1,5 @@
 package com.android.meteorid.manager;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -9,7 +8,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -20,7 +18,7 @@ import com.android.meteorid.utils.Utils;
 public class DataManager {
 
 	private static final String TAG = "DataManager";
-	// ici on gÃ¨re tout le traitement de donnÃ©es ( Get jsons)
+	// ici on gÃƒÂ¨re tout le traitement de donnÃƒÂ©es ( Get jsons)
 
 	public static final String LOAD_BASIC_CITY_OK = "loadBasicCityOk";
 	
