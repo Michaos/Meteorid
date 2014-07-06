@@ -58,7 +58,7 @@ public class DataManager {
 			basicCityList = new ArrayList<City>();
 			
 			for (int i = 0; i < MappingManager.CITIES.length; i++) {
-				String urlApi = FluxManager.URL_API.replace("__ID__", MappingManager.CITIES[i]);
+				String urlApi = FluxManager.URL_API.replaceAll("__ID__", Integer.toString(MappingManager.CITIES[i]));
 				
 				System.out.println(urlApi);
 				
