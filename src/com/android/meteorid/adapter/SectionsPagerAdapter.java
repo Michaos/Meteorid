@@ -2,13 +2,13 @@ package com.android.meteorid.adapter;
 
 import java.util.Locale;
 
-import com.android.meteorid.R;
-import com.android.meteorid.view.CitiesFragment;
-
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.android.meteorid.R;
+import com.android.meteorid.view.CitiesFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
