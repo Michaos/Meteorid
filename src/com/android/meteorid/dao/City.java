@@ -1,11 +1,13 @@
 package com.android.meteorid.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
 
-public class City {
+public class City implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private ArrayList<Day> dayList;
