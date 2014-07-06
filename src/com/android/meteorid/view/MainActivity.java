@@ -1,17 +1,15 @@
 package com.android.meteorid.view;
 
-import com.android.meteorid.R;
-import com.android.meteorid.adapter.SectionsPagerAdapter;
-import com.android.meteorid.manager.DataManager;
-
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.content.Intent;
-import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.android.meteorid.R;
+import com.android.meteorid.adapter.SectionsPagerAdapter;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
