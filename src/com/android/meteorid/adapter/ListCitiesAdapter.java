@@ -2,15 +2,15 @@ package com.android.meteorid.adapter;
 
 import java.util.ArrayList;
 
-import com.android.meteorid.R;
-import com.android.meteorid.dao.City;
-import com.android.meteorid.wrapper.CitiesWrapper;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.android.meteorid.R;
+import com.android.meteorid.dao.City;
+import com.android.meteorid.wrapper.CitiesWrapper;
 
 public class ListCitiesAdapter extends BaseAdapter{
 	
