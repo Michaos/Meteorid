@@ -1,9 +1,5 @@
 package com.android.meteorid.view;
 
-import com.android.meteorid.R;
-import com.android.meteorid.adapter.ListCitiesAdapter;
-import com.android.meteorid.manager.DataManager;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +9,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import com.android.meteorid.R;
+import com.android.meteorid.adapter.ListCitiesAdapter;
+import com.android.meteorid.manager.DataManager;
 
 public class CitiesFragment extends Fragment{
 
@@ -52,7 +54,7 @@ public class CitiesFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_main, container,	false);
 
-		// la je recupere dans quel catégorie on est ( tous == 1 , favoris == 2)
+		// la je recupere dans quel catÃ©gorie on est ( tous == 1 , favoris == 2)
 		
 		if(getArguments().getInt(ARG_SECTION_NUMBER) == 1){
 			getActivity().registerReceiver(receiver, new IntentFilter(DataManager.LOAD_BASIC_CITY_OK));
@@ -70,5 +72,13 @@ public class CitiesFragment extends Fragment{
 	public void refreshData(){
 		ListView lv = (ListView) rootView.findViewById(R.id.listview);
 		lv.setAdapter(new ListCitiesAdapter(getActivity(), DataManager.getInstance(getActivity()).getBasicCityList()));
+		lv.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(getActivity(), CityPagerActivity.class);
+				intent.putExtra("pos", position);
+				startActivity(intent);
+			}
+		});
 	}
 }
